@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 
 import AppleSvg from '../../assets/apple.svg';
 import GoogleSvg from '../../assets/google.svg';
@@ -20,18 +21,6 @@ export function SignIn() {
         }
     }
 
-    const SocialButtons = [
-        {
-            svg: GoogleSvg,
-            title: "Entrar com Google",
-            onPress: handleSignInWithGoogle,
-        },
-        {
-            svg: AppleSvg,
-            title: "Entrar com Apple"
-        }
-    ]
-
     return (
         <S.Container>
             <S.Header>
@@ -42,9 +31,8 @@ export function SignIn() {
             </S.Header>
             <S.Footer>
                 <S.FooterWrapper>
-                    {SocialButtons.map((socialButton, index) => (
-                        <SignInSocialButton key={index} svg={socialButton.svg} onPress={socialButton.onPress} title={socialButton.title} />
-                    ))}
+                    <SignInSocialButton svg={GoogleSvg} onPress={handleSignInWithGoogle} title="Entrar com Google" />
+                    {Platform.OS === 'ios' && <SignInSocialButton svg={AppleSvg} onPress={handleSignInWithGoogle} title="Entrar com Apple" />}
                 </S.FooterWrapper>
             </S.Footer>
         </S.Container>
