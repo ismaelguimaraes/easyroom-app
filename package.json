@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
+    "babel-plugin-inline-dotenv": "^1.7.0",
     "expo": "~46.0.16",
     "expo-auth-session": "~3.7.1",
     "expo-random": "~12.3.0",

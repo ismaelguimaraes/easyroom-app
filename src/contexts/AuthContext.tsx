@@ -31,8 +31,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     async function signInWithGoogle() {
         try {
-            const CLIENT_ID = '1018444772996-n3jlefltjuu9uut5du8bdgt0kkqcrd50.apps.googleusercontent.com';
-            const REDIRECT_URI = 'https://auth.expo.io/@therussojr/easyroom';
+            const { CLIENT_ID, REDIRECT_URI } = process.env;
             const RESPONSE_TYPE = 'token';
             const SCOPE = encodeURI('profile email');
 
