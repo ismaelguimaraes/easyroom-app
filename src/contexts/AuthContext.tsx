@@ -1,6 +1,9 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import * as AuthSession from 'expo-auth-session';
 
+const { CLIENT_ID } = process.env;
+const { REDIRECT_URI } = process.env;
+
 interface AuthProviderProps {
     children: ReactNode;
 }
@@ -31,7 +34,6 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     async function signInWithGoogle() {
         try {
-            const { CLIENT_ID, REDIRECT_URI } = process.env;
             const RESPONSE_TYPE = 'token';
             const SCOPE = encodeURI('profile email');
 
