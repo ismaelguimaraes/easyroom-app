@@ -1,4 +1,5 @@
 import React from 'react';
+import HighlightUniversityCard from '../../components/HighlightUniversityCard';
 
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -21,6 +22,13 @@ export function Home() {
                     <S.FontAwesome5 name="user" />
                 </S.UserContainer>
             </S.Header>
+
+            <S.HighlightUniversitiesCards>
+                <HighlightUniversityCard />
+                <HighlightUniversityCard />
+                <HighlightUniversityCard />
+                <HighlightUniversityCard />
+            </S.HighlightUniversitiesCards>
         </S.Container>
     )
 }

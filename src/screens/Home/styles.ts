@@ -1,6 +1,7 @@
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { FontAwesome5 as FA5 } from '@expo/vector-icons';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
     flex: 1;
@@ -13,13 +14,14 @@ export const Header = styled.View`
     background-color: ${({ theme }) => theme.colors.primary};
 
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
 `;
 
 export const UserContainer = styled.View`
     width: 100%;
     padding: 0 24px;
+    margin-top: ${getStatusBarHeight() + RFValue(44)}px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -55,4 +57,14 @@ export const UserName = styled.Text`
 export const FontAwesome5 = styled(FA5)`
     color: ${({ theme }) => theme.colors.tertiary};
     font-size: ${RFValue(22)}px;
+`;
+
+export const HighlightUniversitiesCards = styled.ScrollView.attrs({
+    showsHorizontalScrollIndicator: false,
+    horizontal: true,
+    contentContainerStyle: { paddingHorizontal: 24 }
+})`
+    width: 100%;
+    position: absolute;
+    margin-top: ${RFPercentage(27)}px;
 `;
