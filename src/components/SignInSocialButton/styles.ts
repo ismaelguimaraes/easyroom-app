@@ -23,5 +23,6 @@ export const ImageContainer = styled.View`
 export const Text = styled.Text`
     flex: 1;
     text-align: center;
+    font-family: ${({ theme }) => theme.fonts.regular};
     font-size: ${RFValue(14)}px;
 `;

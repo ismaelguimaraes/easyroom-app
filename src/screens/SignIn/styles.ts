@@ -22,12 +22,14 @@ export const Title = styled.Text`
     font-size: ${RFValue(30)}px;
     text-align: center;
     margin-top: 45px;
+    font-family: ${({ theme }) => theme.fonts.medium};
 `;
 
 export const SignInTitle = styled.Text`
     color: ${({ theme }) => theme.colors.text.neutral.white};
     font-size: ${RFValue(16)}px;
     text-align: center;
+    font-family: ${({ theme }) => theme.fonts.regular};
     margin-top: 80px;
     margin-bottom: 67px;
 `;
