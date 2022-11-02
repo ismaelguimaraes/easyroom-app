@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useContext, useState, useEffect } from "react";
 
 import * as AuthSession from 'expo-auth-session';
 import * as AppleAuthenticate from 'expo-apple-authentication';
@@ -36,6 +36,21 @@ const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserData>({} as UserData);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        async function loadUserStorageDate(): Promise<void> {
+            const data = await AsyncStorage.getItem('@easyroom:user');
+
+            if (data) {
+                const userLogged = JSON.parse(data) as UserData;
+                setUser(userLogged);
+            }
+            setIsLoading(false);
+        }
+
+        loadUserStorageDate();
+    }, []);
 
     async function signInWithGoogle() {
         try {

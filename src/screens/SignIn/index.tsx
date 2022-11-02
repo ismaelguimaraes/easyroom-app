@@ -1,5 +1,6 @@
-import React from 'react';
-import { Platform } from 'react-native';
+import React,  { useState } from 'react';
+import { Platform, ActivityIndicator } from 'react-native';
+import { useTheme } from 'styled-components';
 
 import AppleSvg from '../../assets/apple.svg';
 import GoogleSvg from '../../assets/google.svg';
@@ -13,19 +14,27 @@ import * as S from './styles';
 export function SignIn() {
     const { signInWithGoogle, signInWithApple } = useAuth();
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const theme = useTheme();
+
     async function handleSignInWithGoogle() {
         try {
+            setIsLoading(true);
             await signInWithGoogle();
         } catch (error) {
             console.error(error);
+            setIsLoading(false);
         }
     }
 
     async function handleSignInWithApple() {
         try {
+            setIsLoading(true);
             await signInWithApple();
         } catch (error) {
             console.error(error);
+            setIsLoading(false);
         }
     }
  
@@ -43,6 +52,7 @@ export function SignIn() {
                     {Platform.OS === 'ios' && <SignInSocialButton svg={AppleSvg} onPress={handleSignInWithApple} title="Entrar com Apple" />}
                 </S.FooterWrapper>
             </S.Footer>
+            {isLoading && <ActivityIndicator color={theme.colors.text.neutral.white} size="small" style={{ marginTop: 18 }} />}
         </S.Container>
     )
 }
