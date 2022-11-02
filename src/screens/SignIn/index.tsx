@@ -11,7 +11,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import * as S from './styles';
 
 export function SignIn() {
-    const { signInWithGoogle } = useAuth();
+    const { signInWithGoogle, signInWithApple } = useAuth();
 
     async function handleSignInWithGoogle() {
         try {
@@ -21,6 +21,14 @@ export function SignIn() {
         }
     }
 
+    async function handleSignInWithApple() {
+        try {
+            await signInWithApple();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+ 
     return (
         <S.Container>
             <S.Header>
@@ -32,7 +40,7 @@ export function SignIn() {
             <S.Footer>
                 <S.FooterWrapper>
                     <SignInSocialButton svg={GoogleSvg} onPress={handleSignInWithGoogle} title="Entrar com Google" />
-                    {Platform.OS === 'ios' && <SignInSocialButton svg={AppleSvg} onPress={handleSignInWithGoogle} title="Entrar com Apple" />}
+                    {Platform.OS === 'ios' && <SignInSocialButton svg={AppleSvg} onPress={handleSignInWithApple} title="Entrar com Apple" />}
                 </S.FooterWrapper>
             </S.Footer>
         </S.Container>

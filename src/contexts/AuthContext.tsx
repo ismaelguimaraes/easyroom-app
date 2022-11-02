@@ -1,5 +1,9 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
+
 import * as AuthSession from 'expo-auth-session';
+import * as AppleAuthenticate from 'expo-apple-authentication';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { CLIENT_ID } = process.env;
 const { REDIRECT_URI } = process.env;
@@ -18,6 +22,7 @@ interface UserData {
 interface AuthContextData {
     user: UserData;
     signInWithGoogle: () => Promise<void>;
+    signInWithApple: () => Promise<void>;
 }
 
 interface AuthorizationResponse {
@@ -44,13 +49,41 @@ function AuthProvider({ children }: AuthProviderProps) {
             if (type === 'success') {
                 const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`);
                 const userInfo = await response.json();
-                
-                setUser({
+
+                const userLogged: UserData = {
                     id: userInfo.id,
                     email: userInfo.email,
                     name: userInfo.given_name,
                     photo: userInfo.picture
-                });
+                }
+                
+                setUser(userLogged);
+                await AsyncStorage.setItem('@easyroom:user', JSON.stringify(userLogged));
+            }
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
+    async function signInWithApple() {
+        try {
+            const credential = await AppleAuthenticate.signInAsync({
+                requestedScopes: [
+                    AppleAuthenticate.AppleAuthenticationScope.FULL_NAME,
+                    AppleAuthenticate.AppleAuthenticationScope.EMAIL,
+                ]
+            });
+
+            if (credential) {
+                const userLogged: UserData = {
+                    id: credential.user,
+                    email: credential.email!,
+                    name: credential.fullName!.givenName!,
+                    photo: undefined
+                }
+                
+                setUser(userLogged);
+                await AsyncStorage.setItem('@easyroom:user', JSON.stringify(userLogged));
             }
         } catch (error: any) {
             throw new Error(error);
@@ -60,7 +93,8 @@ function AuthProvider({ children }: AuthProviderProps) {
     return (
         <AuthContext.Provider value={{ 
             user,
-            signInWithGoogle
+            signInWithGoogle,
+            signInWithApple
         }}>
             {children}
         </AuthContext.Provider>
