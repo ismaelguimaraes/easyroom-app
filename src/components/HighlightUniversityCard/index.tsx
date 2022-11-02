@@ -1,19 +1,25 @@
 import React from 'react';
-import { View } from 'react-native';
+
+import { DormitoriesProps } from '../../@types/dormitories';
 
 import * as S from './styles';
 
 interface HighlightUniversityCardProps {
-    title: string;
-    dormitories: number;
+    name: string;
+    photo: string;
+    dormitories: DormitoriesProps[];
 }
 
-export default function HighlightUniversityCard() {
+export default function HighlightUniversityCard({
+    name,
+    dormitories,
+    photo
+}: HighlightUniversityCardProps) {
     return (
-        <S.Container source={{ uri: 'https://jpimg.com.br/uploads/2021/06/ufrj.jpg' }}>
+        <S.Container source={{ uri: photo }}>
             <S.ContainerWrapper>
-                <S.Title>UFRJ</S.Title>
-                <S.Dormitories>58 dormitórios</S.Dormitories>
+                <S.Title>{name}</S.Title>
+                <S.Dormitories>{dormitories.length} {dormitories.length === 1 ? 'dormitório' : 'dormitórios'}</S.Dormitories>
             </S.ContainerWrapper>
         </S.Container>
     );

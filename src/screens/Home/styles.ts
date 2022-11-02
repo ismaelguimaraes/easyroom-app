@@ -68,3 +68,15 @@ export const HighlightUniversitiesCards = styled.ScrollView.attrs({
     position: absolute;
     margin-top: ${RFPercentage(27)}px;
 `;
+
+export const List = styled.View`
+    flex: 1;
+    padding: 0 24px;
+    margin-top: ${RFPercentage(19)}px;
+`;
+
+export const ListTitle = styled.Text`
+    font-family: ${({ theme }) => theme.fonts.bold};
+    font-size: ${RFValue(20)}px;
+    color: ${({ theme }) => theme.colors.text.primary};
+`;
