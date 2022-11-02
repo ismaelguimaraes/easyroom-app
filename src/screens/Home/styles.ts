@@ -1,7 +1,7 @@
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { FontAwesome5 as FA5 } from '@expo/vector-icons';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { getStatusBarHeight, getBottomSpace } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
     flex: 1;
@@ -79,4 +79,10 @@ export const ListTitle = styled.Text`
     font-family: ${({ theme }) => theme.fonts.bold};
     font-size: ${RFValue(20)}px;
     color: ${({ theme }) => theme.colors.text.primary};
+    margin-bottom: 16px;
 `;
+
+export const DormitoriesCardList = styled.FlatList.attrs({
+    showsVerticalScrollIndicator: false,
+    contentContainerStyle: getBottomSpace(),
+})``;

@@ -1,5 +1,7 @@
 import React from 'react';
+import { DormitoriesProps } from '../../@types/dormitories';
 import UniversitiesProps from '../../@types/universities';
+import DormitoryCard from '../../components/DormitoryCard';
 import HighlightUniversityCard from '../../components/HighlightUniversityCard';
 
 import { useAuth } from '../../contexts/AuthContext';
@@ -454,6 +456,11 @@ export function Home() {
 
             <S.List>
                 <S.ListTitle>Os mais curtidos</S.ListTitle>
+
+                <S.DormitoriesCardList 
+                    data={universities[1].dormitories}
+                    renderItem={({ item }: any) => <DormitoryCard item={item} />}
+                />
             </S.List>
         </S.Container>
     )
