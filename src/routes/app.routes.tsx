@@ -7,7 +7,7 @@ import { Home } from '../screens/Home';
 
 export function AppRoutes() {
     return (
-        <Navigator>
+        <Navigator screenOptions={{ headerShown: false }}>
             <Screen name="Início" component={Home} />
         </Navigator>
     )
