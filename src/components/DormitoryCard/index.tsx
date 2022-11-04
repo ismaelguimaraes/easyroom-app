@@ -1,19 +1,22 @@
 import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
+
 import { DormitoriesProps } from '../../@types/dormitories';
 
 import * as S from './styles';
 
-interface DormitoryCardProps {
+interface DormitoryCardProps extends TouchableOpacityProps {
     item: DormitoriesProps;
 }
 
 export default function DormitoryCard({
-    item
+    item,
+    ...rest
 }: DormitoryCardProps) {
     const { name, owner, photos, type } = item;
 
     return (
-        <S.Container>
+        <S.Container {...rest}>
             <S.Image source={{ uri: photos[0] }}>
                 
             </S.Image>

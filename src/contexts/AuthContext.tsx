@@ -40,7 +40,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     useEffect(() => {
         async function loadUserStorageDate(): Promise<void> {
-            // await AsyncStorage.removeItem('@easyroom:user');
+            await AsyncStorage.removeItem('@easyroom:user');
             const data = await AsyncStorage.getItem('@easyroom:user');
 
             if (data) {

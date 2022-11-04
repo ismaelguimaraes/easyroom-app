@@ -1,14 +1,20 @@
 import React from 'react';
-import {  createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+type RootStackParamList = {
+    [key: string]: undefined | { [key: string]: any };
+}
+
+const AppRoutesStack = createStackNavigator<RootStackParamList>();
 
 import { Home } from '../screens/Home';
+import { Dormitory } from '../screens/Dormitory';
 
 export function AppRoutes() {
     return (
-        <Navigator screenOptions={{ headerShown: false }}>
-            <Screen name="Início" component={Home} />
-        </Navigator>
+        <AppRoutesStack.Navigator screenOptions={{ headerShown: false }}>
+            <AppRoutesStack.Screen name="Home" component={Home} />
+            <AppRoutesStack.Screen name="Dormitory" component={Dormitory} />
+        </AppRoutesStack.Navigator>
     )
 }
